@@ -5,7 +5,6 @@ const createModel = require("./model");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const session = require("express-session");
-const FileStore = require("session-file-store")(session);
 const auth = require("./controllers/auth");
 const challenge = require("./controllers/challenge");
 const user = require("./controllers/user");
@@ -28,7 +27,6 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: true,
-    store: new FileStore({}),
   })
 );
 
