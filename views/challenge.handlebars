@@ -1,0 +1,27 @@
+<div class="content card">
+
+    <form action="/challenge" method="POST" class="space-y-3">
+        <div>
+            <label class="label" for="challengee">Challengee</label>
+            <select id="challengee" name="challengee" class="textInput">
+                {{#each challengees}}
+                <option value="{{id}}">{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            <label for="title" class="label">Title</label>
+            <input type="text" id="title" name="title" class="textInput" />
+        </div>
+        <div>
+            <label for="wager" class="label">Wager</label>
+            <input type="text" id="wager" name="wager" class="textInput" />
+        </div>
+        <div>
+            <label for="description" class="label">Description</label>
+            <textarea id="description" name="description" class="textInput h-40"></textarea>
+        </div>
+
+        <button type="submit" class="btn">Challenge</button>
+    </form>
+</div>

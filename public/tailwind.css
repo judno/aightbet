@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+
+.brandGradient {
+  @apply bg-gradient-to-r from-purple-400 via-pink-500 to-red-500;
+}
+
+.btn {
+  @apply brandGradient px-5 py-2 rounded-full text-white font-semibold text-lg;
+}
+
+.textInput {
+  @apply focus:border-purple-400 focus:ring-1 focus:ring-purple-400 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 px-2;
+}
+
+.label {
+  @apply uppercase text-lg font-semibold tracking-wide;
+}
+
+.content {
+  @apply max-w-screen-md m-auto px-4;
+}
+
+.card {
+  @apply bg-white rounded-md p-6 shadow;
+}
+
+.alert {
+  @apply text-red-500;
+}
+
+.link {
+  @apply text-purple-500 hover:underline font-semibold;
+}
+
+@tailwind utilities;

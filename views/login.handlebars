@@ -1,0 +1,22 @@
+<div class="content card">
+    <h1></h1>
+
+    <form class="space-y-3" action="/login" method="POST">
+        <div>
+            <label class="label" for="username">Username:</label>
+            <input class="textInput" type="text" id="username" name="username">
+        </div>
+        <div>
+            <label class="label" for="password">Password:</label>
+            <input class="textInput" type="password" id="password" name="password">
+        </div>
+        {{#if failedLogin}}
+        <div class="alert">
+            Incorrect username or password
+        </div>
+        {{/if}}
+        <button class="btn">Login</button>
+    </form>
+
+
+</div>

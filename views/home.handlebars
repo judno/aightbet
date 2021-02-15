@@ -1,0 +1,10 @@
+<div class="flex content">
+    <div id="left-content" class="w-2/3">
+        <div id="challenges">Stuff</div>
+    </div>
+    <div id="sidebar" class="card">
+        {{#each users}}
+        <h2><a href="/user/{{ id }}">{{ name }}</a></h2>
+        {{/each}}
+    </div>
+</div>
