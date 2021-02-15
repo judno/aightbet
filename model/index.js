@@ -3,15 +3,12 @@ const defineUser = require("./User");
 const defineBet = require("./Bet");
 const config = require("../config");
 
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  {
-    host: config.host,
-    dialect: config.dialect,
-  }
-);
+const sequelize = process.env.JAWSDB_URL
+  ? new Sequelize(process.env.JAWSDB_URL)
+  : new Sequelize(config.database, config.username, config.password, {
+      host: config.host,
+      dialect: config.dialect,
+    });
 
 async function getUserPosition(userId) {
   const [results] = await sequelize.query(`select count(1) as position
