@@ -1,7 +1,7 @@
 module.exports = {
   purge: {
     mode: "all",
-    enabled: false,
+    enabled: true,
     content: ["./views/**/*.handlebars"],
     options: {
       keyframes: true,
