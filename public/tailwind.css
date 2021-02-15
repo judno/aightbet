@@ -33,4 +33,8 @@
   @apply text-purple-500 hover:underline font-semibold;
 }
 
+.status {
+  @apply font-extrabold text-xl tracking-wide italic;
+}
+
 @tailwind utilities;

@@ -13,6 +13,7 @@ function challenge(app, model) {
     });
 
     res.render("challenge", {
+      loggedIn: Boolean(req.user),
       challengees: challengees
         .map((user) => user.dataValues)
         .sort((a, b) => {

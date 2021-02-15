@@ -1,11 +1,25 @@
 const { Sequelize } = require("sequelize");
 const defineUser = require("./User");
 const defineBet = require("./Bet");
+const config = require("../config");
 
-const sequelize = new Sequelize("aightbet", "root", "mysql", {
-  host: "localhost",
-  dialect: "mysql",
-});
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  {
+    host: config.host,
+    dialect: config.dialect,
+  }
+);
+
+async function getUserPosition(userId) {
+  const [results] = await sequelize.query(`select count(1) as position
+  from users
+  where points > (select points from users where id = ${userId})`);
+
+  return results[0].position + 1;
+}
 
 async function createModel() {
   const User = defineUser(sequelize);
@@ -30,6 +44,7 @@ async function createModel() {
     Challengee,
     Challenger,
     Winner,
+    getUserPosition,
   };
 }
 module.exports = createModel;

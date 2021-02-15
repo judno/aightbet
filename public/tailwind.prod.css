@@ -708,6 +708,14 @@ video {
   text-decoration: underline;
 }
 
+.status {
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-style: italic;
+  letter-spacing: 0.025em;
+}
+
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));

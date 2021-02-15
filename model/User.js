@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-function defineBet(sequelize) {
+function defineUser(sequelize) {
   return sequelize.define(
     "User",
     {
@@ -15,7 +15,7 @@ function defineBet(sequelize) {
       },
       points: {
         type: DataTypes.INTEGER,
-        defaultValue: 0,
+        defaultValue: 1000,
       },
     },
     {
@@ -24,4 +24,4 @@ function defineBet(sequelize) {
   );
 }
 
-module.exports = defineBet;
+module.exports = defineUser;

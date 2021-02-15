@@ -9,10 +9,21 @@
 
 <body class="bg-gray-100">
     <nav class="bg-white mb-10 shadow-lg">
-        <a class="flex px-4 py-3" href="/">
-            <span class="font-bold line-through text-xl">AIGHT</span><span
-                class="font-extrabold tracking-widest text-xl ">BET</span>
-        </a>
+        <div class="flex justify-between px-4">
+            <a class="flex py-3" href="/">
+                <span class="font-bold line-through text-xl">AIGHT</span><span
+                    class="font-extrabold tracking-widest text-xl ">BET</span>
+            </a>
+            <div class="flex items-center space-x-3">
+                {{#if loggedIn}}
+                <a class="link" href="/logout">Logout</a>
+                {{/if}}
+                {{#unless loggedIn}}
+                <a class="link" href="/login">Login</a>
+                <a class="link" href="/sign-up">Sign up</a>
+                {{/unless}}
+            </div>
+        </div>
         <div class="h-0.5 brandGradient" />
     </nav>
 

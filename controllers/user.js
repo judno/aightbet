@@ -1,4 +1,5 @@
 const { Op } = require("sequelize");
+const getStatus = require("./utils");
 
 function user(app, model) {
   app.get("/user/:id", async (req, res) => {
@@ -43,11 +44,16 @@ function user(app, model) {
       }
     }
 
+    const userPosition = await model.getUserPosition(user.id);
+    const totalUsers = await model.User.count();
+
     const templateVars = {
-      isLoggedInUser: userId === req.user.id,
+      loggedIn: Boolean(req.user),
+      isLoggedInUser: req.user ? userId === req.user.id : false,
       userId,
       name: user.name,
       points: user.points,
+      status: getStatus(totalUsers, userPosition),
       pastChallenges,
       activeChallenges,
     };

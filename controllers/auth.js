@@ -44,7 +44,9 @@ function auth(app, model) {
     "/login",
     passport.authenticate("local", { failureRedirect: "/login?attemptfailed" }),
     function (req, res) {
-      res.redirect(`/user/${user.id}`);
+      req.session.save(function () {
+        res.redirect(`/user/${req.user.id}`);
+      });
     }
   );
   app.post("/sign-up", async function (req, res) {
@@ -66,17 +68,21 @@ function auth(app, model) {
 
   app.get("/logout", (req, res) => {
     req.logout();
-    res.redirect("/");
+
+    req.session.destroy(function (err) {
+      res.redirect("/");
+    });
   });
 
   app.get("/login", async (req, res) => {
     res.render("login", {
+      loggedIn: Boolean(req.user),
       failedLogin: req.query.hasOwnProperty("attemptfailed"),
     });
   });
 
   app.get("/sign-up", async (req, res) => {
-    res.render("sign-up");
+    res.render("sign-up", { loggedIn: Boolean(req.user) });
   });
 }
 

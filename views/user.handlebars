@@ -1,23 +1,25 @@
 <div class="content space-y-10">
-    <div class="flex justify-between">
+    <div class="flex justify-between flex-col md:flex-row gap-y-3">
         <h1 class="font-extrabold text-4xl">{{{ name }}}</h1>
-        {{#unless isLoggedInUser}}
-        <a href="/challenge?target={{ userId }}" class="btn">Challenge</a>
-        {{/unless}}
-
         <div class="text-4xl flex">
             <div class="h-10 w-10 mr-3">
                 {{> fire-icon}}
             </div>{{{ points }}}
         </div>
     </div>
+    <div class="flex justify-between flex-col sm:flex-row gap-y-3">
+        <div class="status">{{status}}</div>
+        {{#unless isLoggedInUser}}
+        <a href="/challenge?target={{ userId }}" class="btn">Challenge</a>
+        {{/unless}}
+    </div>
     <div id="active-challenges" class="space-y-4">
         <h3 class="text-lg font-medium text-gray-600">Active challenges</h3>
         <div class="divide-y space-y-3">
             {{#each activeChallenges}}
-            <div class="card flex justify-between">
+            <div class="card flex justify-between flex-col sm:flex-row gap-y-3">
                 <div class="space-y-2">
-                    <div class="flex space-x-3">
+                    <div class="flex flex-col sm:flex-row gap-3">
                         <div class="font-semibold">{{ title }}</div>
                         <div class="space-x-2">
                             <span class="rounded-full p-2 bg-gray-900 text-white font-bold">VS</span>
@@ -31,7 +33,7 @@
                         {{> fire-icon}}
                     </div>{{ wager }}
                     {{#if ../isLoggedInUser }}
-                    <form action="/challenge/{{ id }}" method="POST" class="mr-1 space-y-3 flex flex-col">
+                    <form action="/challenge/{{ id }}" method="POST" class="mr-1 flex flex-row sm:flex-col gap-3">
                         <button name="winner" value="{{{ ../userId }}}" type="submit" class="h-7 w-7">
                             {{> tick}}
                         </button>
@@ -50,9 +52,9 @@
     <div id="past-challenges" class="space-y-4">
         <h3 class="text-lg font-medium text-gray-600">Past challenges</h3>
         {{#each pastChallenges}}
-        <div class="card flex justify-between">
+        <div class="card flex justify-between flex-col sm:flex-row gap-y-3">
             <div class="space-y-2">
-                <div class="flex space-x-3">
+                <div class="flex flex-col sm:flex-row gap-3">
                     <div class="font-semibold">{{ title }}</div>
                     <div class="space-x-2">
                         {{#if won}}

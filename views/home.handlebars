@@ -1,10 +1,32 @@
-<div class="flex content">
-    <div id="left-content" class="w-2/3">
-        <div id="challenges">Stuff</div>
+<div class="content space-y-5">
+    {{#each users}}
+    <div class="card space-y-3">
+        <div class="flex justify-between">
+            <a class="link text-lg" href="/user/{{ id }}">{{ name }}</a>
+            <div class="flex">
+                <div class="h-6 w-6 mr-1">
+                    {{> fire-icon}}
+                </div>{{ points }}
+            </div>
+        </div>
+
+        <div class="flex justify-between">
+            <div class="status text-base">{{{ status }}}</div>
+            <div class="flex space-x-2 ">
+                {{#each streak}}
+                <div class="h-6 w-6">
+                    {{#if this}}
+                    {{> tick}}
+                    {{/if}}
+
+                    {{#unless this}}
+                    {{> cross}}
+                    {{/unless}}
+                </div>
+
+                {{/each}}
+            </div>
+        </div>
     </div>
-    <div id="sidebar" class="card">
-        {{#each users}}
-        <h2><a href="/user/{{ id }}">{{ name }}</a></h2>
-        {{/each}}
-    </div>
+    {{/each}}
 </div>
