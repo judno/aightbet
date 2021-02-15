@@ -10,6 +10,8 @@ const auth = require("./controllers/auth");
 const challenge = require("./controllers/challenge");
 const user = require("./controllers/user");
 
+const PORT = process.env.PORT || 8080;
+
 const app = express();
 
 // Handlebars setup
@@ -41,7 +43,7 @@ async function init() {
   challenge(app, model);
   user(app, model);
 
-  app.listen(8080, () => {
+  app.listen(PORT, () => {
     console.log("Server running at http://localhost:8080");
   });
 }
