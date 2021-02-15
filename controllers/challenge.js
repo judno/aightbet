@@ -44,7 +44,7 @@ function challenge(app, model) {
 
   app.post("/challenge/:id", async function (req, res) {
     const challengeId = req.params.id;
-    const winnerId = req.body.winner;
+    const winnerId = parseInt(req.body.winner, 10);
 
     // Get Bet and set winner
     const bet = await model.Bet.findOne({ where: { id: challengeId } });
