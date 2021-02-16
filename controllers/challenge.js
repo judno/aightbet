@@ -1,18 +1,32 @@
 const { Op } = require("sequelize");
 
-function challenge(app, model) {
-  app.get("/challenge", async (req, res) => {
-    if (!req.user) {
-      return res.redirect("/login");
+async function challenge(app, model) {
+  async function getAllocatedPoints(userId) {
+    const bets = await model.Bet.findAll({
+      where: {
+        [Op.or]: [{ challengeeId: userId }, { challengerId: userId }],
+        winnerId: { [Op.is]: null },
+      },
+    });
+
+    console.log(bets);
+
+    let allocatedPoints = 0;
+
+    for (const bet of bets) {
+      allocatedPoints += bet.wager;
     }
 
-    const challengeeId = parseInt(req.query.target, 10);
+    return allocatedPoints;
+  }
 
+  async function renderChallengeForm(req, res, challengeeId, error) {
     const challengees = await model.User.findAll({
       where: { id: { [Op.not]: req.user.id } },
     });
 
     res.render("challenge", {
+      error,
       loggedIn: Boolean(req.user),
       challengees: challengees
         .map((user) => user.dataValues)
@@ -27,9 +41,48 @@ function challenge(app, model) {
           return 0;
         }),
     });
+  }
+
+  app.get("/challenge", async (req, res) => {
+    if (!req.user) {
+      return res.redirect("/login");
+    }
+
+    const challengeeId = parseInt(req.query.target, 10);
+
+    await renderChallengeForm(req, res, challengeeId);
   });
 
   app.post("/challenge", async function (req, res) {
+    if (!req.user) {
+      return res.redirect("/login");
+    }
+
+    const challengee = await model.User.findOne({
+      where: { id: req.body.challengee },
+    });
+    const wager = parseInt(req.body.wager, 10);
+
+    const userAllocatedPoints = await getAllocatedPoints(req.user.id);
+    if (wager > req.user.points - userAllocatedPoints) {
+      return await renderChallengeForm(
+        req,
+        res,
+        parseInt(req.body.challengee, 10),
+        "You don't have enough points for that wager"
+      );
+    }
+
+    const challengeeAllocatedPoints = await getAllocatedPoints(challengee.id);
+    if (wager > challengee.points - challengeeAllocatedPoints) {
+      return await renderChallengeForm(
+        req,
+        res,
+        parseInt(req.body.challengee, 10),
+        `${challengee.name} doesn't have enough points for that wager`
+      );
+    }
+
     //create a bet
     await model.Bet.create({
       title: req.body.title,

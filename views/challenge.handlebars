@@ -21,7 +21,11 @@
             <label for="description" class="label">Description</label>
             <textarea id="description" name="description" class="textInput h-40"></textarea>
         </div>
-
+        {{#if error}}
+        <div class="alert">
+            {{error}}
+        </div>
+        {{/if}}
         <button type="submit" class="btn">Challenge</button>
     </form>
 </div>
