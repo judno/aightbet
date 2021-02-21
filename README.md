@@ -20,3 +20,7 @@ Once the Bet is over log the results and you will be award or deducted points ba
 ## Deployed App
 
 [AIGHTBET](https://aightbet.herokuapp.com/)
+
+## Screenshot
+
+<img width="949" alt="aightbet" src="https://user-images.githubusercontent.com/69154965/108624597-f427cf00-7499-11eb-9518-b06e75893e00.png">
