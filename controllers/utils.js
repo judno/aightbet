@@ -1,6 +1,6 @@
 function getStatus(total, position) {
   const percentile = position / total;
-
+  // ranking system for users
   if (position === 1) {
     return "GOAT";
   }

@@ -46,7 +46,7 @@ function user(app, model) {
 
     const userPosition = await model.getUserPosition(user.id);
     const totalUsers = await model.User.count();
-
+    // user
     const templateVars = {
       loggedIn: Boolean(req.user),
       isLoggedInUser: req.user ? userId === req.user.id : false,

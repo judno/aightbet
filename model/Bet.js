@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-
+//bet features
 function defineBet(sequelize) {
   return sequelize.define("Bet", {
     // Model attributes are defined here
